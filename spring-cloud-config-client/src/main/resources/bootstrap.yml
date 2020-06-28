@@ -10,6 +10,14 @@ spring:
       discovery:
         enabled: true
         service-id: config-server
+
+server:
+  port: 9006
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+
 eureka:
   client:
     service-url:

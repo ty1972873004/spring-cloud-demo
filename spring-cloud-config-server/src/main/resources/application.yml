@@ -8,10 +8,13 @@ spring:
       label: master
       server:
         git:
+          #github配置地址
           uri: https://github.com/ty1972873004/spring-cloud-config.git
+          #配置文件路径
           search-paths: appconfig
           #username:
           #password:
+          #git分支
           default-label: master
 
 logging:
