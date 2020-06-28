@@ -1,0 +1,23 @@
+server:
+  port: 9005
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+          uri: https://github.com/ty1972873004/spring-cloud-config.git
+          search-paths: appconfig
+          #username:
+          #password:
+          default-label: master
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/

@@ -1,0 +1,15 @@
+server:
+  port: 9004
+spring:
+  application:
+    name: hystrix-demo
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/
+feign:
+  hystrix:
+    enabled: true
