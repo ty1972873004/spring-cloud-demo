@@ -16,6 +16,25 @@ spring:
           #password:
           #git分支
           default-label: master
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+  # 消息队列
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+# 度量指标监控与健康检查
+management:
+  endpoints:
+    web:
+      base-path: /actuator    # 访问端点根路径，默认为 /actuator
+      exposure:
+        include: bus-refresh  # 需要开启的端点
 
 logging:
   pattern:
