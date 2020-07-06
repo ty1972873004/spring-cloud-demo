@@ -1,0 +1,27 @@
+server:
+  port: 9100
+eureka:
+  instance:
+    #每隔5s发送一次心跳
+    lease-renewal-interval-in-seconds: 5
+    #告知服务端10秒还未收到心跳的话，就将该服务移除列表
+    lease-expiration-duration-in-seconds: 10
+    #健康检查路径
+    health-check-url-path: /actuator/health
+  client:
+    #默认为30秒
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      #eureka注册中心地址
+      defaultZone: http://localhost:8888/eureka/
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          #开启从注册中心动态创建路由的功能
+          enabled: true
+          #使用小写服务名，默认是大写
+          lower-case-service-id: true

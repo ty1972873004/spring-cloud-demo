@@ -1,0 +1,42 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: eureka-client-provider #路由的ID
+          uri: lb://eureka-client-provider
+          predicates:
+            - Path=/provider/** # 路由规则
+          filters:
+            - StripPrefix=1
+            # 移除请求名为name参数
+            - RemoveRequestParameter=name
+            # 移除名称为X-Response-Bar响应头
+            #- RemoveResponseHeader=X-Response-Bar
+            # 移除名称为X-Request-Foo的请求头
+            #- RemoveRequestHeader=X-Request-Foo
+            # 配置成HTTP状态码, URL的形式
+            #- RedirectTo=302, http://www.hxmec.com
+            #- name: RequestRateLimiter
+            #  args:
+            #    rate-limiter: "#{@myRateLimiter}"
+            #    key-resolver: "#{@userKeyResolver}"
+            # 保留原始请求的host头信息，并原封不动的转发出去，而不是被gateway的http客户端重置。
+            - PreserveHostHeader
+            # 将上游 X-Request-Foo Header 的值赋值到下游 X-Request-red中，如果输入标头不存在，则过滤器不起作用。如果新的命名标头已经存在，则其值将使用新值进行扩充。
+            # 访问http://localhost:9100/provider/demo/feign -> eureka-client-provider/demo/feign
+            #- MapRequestHeader=X-Request-Foo, X-Request-red
+            # 给请求增加Header X-Request-red
+            # 访问http://localhost:9100/provider/demo/hello-> eureka-client-provider/demo/hello
+            #- AddRequestHeader=X-Request-red, blue
+            # 给请求增加参数name
+            # 访问http://localhost:9100/provider/demo/feign -> eureka-client-provider/demo/feign
+            #- AddRequestParameter=name, Trazen
+            # 给请求增加响应的header
+            # 访问http://localhost:9100/provider/demo/hello-> eureka-client-provider/demo/hello
+            #- AddResponseHeader=X-Response-Foo, Bar
+            #剔除重复的响应头
+            #- DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
+            #- name: Hystrix
+            #  args:
+            #    name: fallbackcmd
+            #    fallback-uri: forward:/fallback

@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    include: filter
+  redis:
+    host: 172.18.30.161
+    port: 19551
+    password: DomainComOnly@redis#list
+    database: 5
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: eureka-client-provider #路由的ID
+#          uri: lb://eureka-client-provider
+#          predicates:
+#            - Path=/provider/** # 路由规则
+#          filters:
+#            - StripPrefix=1
+#        - id: eureka-client-consumer #路由的ID
+#          uri: lb://eureka-client-consumer
+#          predicates:
+#            - Path=/consumer/** # 路由规则
+#          filters:
+#            - StripPrefix=1
